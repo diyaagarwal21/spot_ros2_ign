@@ -147,12 +147,12 @@ QuadrupedController::QuadrupedController()
 
   for (int i = 0; i < 4; i++) {
     //fillLeg(base_.legs[i], nh, model, links_map[i]);
-    this->declare_parameter(links_map[i]);
+    this->declare_parameter(links_map[i],links_map);
     rclcpp::Parameter curr_links_param(links_map[i], std::vector<std::string>({}));
     this->get_parameter(links_map[i], curr_links_param);
     std::vector<std::string> curr_links = curr_links_param.as_string_array();
 
-    RCLCPP_INFO(get_logger(), "Got links %d for %s", curr_links.size(), links_map[i].c_str());
+    RCLCPP_INFO(get_logger(), "Got links %ld for %s", curr_links.size(), links_map[i].c_str());
 
     for (int j = 3; j > -1; j--) {
       std::string ref_link;
@@ -181,7 +181,7 @@ QuadrupedController::QuadrupedController()
   joints_map.push_back("right_front_joints");
   joints_map.push_back("right_hind_joints");
   for (int i = 0; i < 4; i++) {
-    this->declare_parameter(joints_map[i]);
+    this->declare_parameter(joints_map[i],joints_map);
     rclcpp::Parameter curr_joints_param(joints_map[i], std::vector<std::string>({}));
     this->get_parameter(joints_map[i], curr_joints_param);
 

@@ -90,10 +90,14 @@ namespace champ
                 }
             }
 
-            void getVelocities(champ::Velocities &vel, Time now = now())
+            void getVelocities(champ::Velocities &vel, Time now)
             {      
                 //if all legs are on the ground, nothing to calculate
                 //or if no legs are on the ground, probably the robot is upside-down
+                
+                if (now == Time()) {
+                        now = this->now();  // or however you get the current time
+                }
                 if(allFeetInContact() || noFootInContact())
                 {
                     vel.linear.x = 0.0;

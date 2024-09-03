@@ -153,24 +153,70 @@
 
     <xacro:spot_camera prefix="$(arg prefix)" name="back" simulate="$(arg simulate_cameras)" />
     <xacro:fixed_joint name="camera_back_j" parent="$(arg prefix)base_link" child="$(arg prefix)camera_back" xyz="-0.425 0 0.01" rpy="0 0.3 ${-pi}" />
+    
+    
+    <ros2_control name="IgnitionSystem" type="system">
+        <hardware>
+            <plugin>ign_ros2_control/IgnitionSystem</plugin> 
+        </hardware>
+        <joint name="front_left_hip_x">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="front_left_hip_y">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="front_left_knee">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="front_right_hip_x">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="front_right_hip_y">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="front_right_knee">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="rear_left_hip_x">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="rear_left_hip_y">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="rear_left_knee">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="rear_right_hip_x">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="rear_right_hip_y">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="rear_right_knee">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+    </ros2_control>
 
-    <gazebo>
-        <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
-            <ros>
-                <namespace></namespace>
-                <remapping>odom:=odom/ground_truth</remapping>
-            </ros>
-            <body_name>base_link</body_name>
-            <update_rate>20</update_rate>
-            <xyz_offset>0 0 0</xyz_offset>
-            <rpy_offset>0.0 0.0 0.0</rpy_offset>
-            <gaussian_noise>0.01</gaussian_noise>
-        </plugin>
-    </gazebo>
-
-    <gazebo>
-        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+   <gazebo>
+        <plugin name="ign_ros2_control::IgnitionROS2ControlPlugin" filename="ign_ros2_control-system">
+            <!-- <robot_param>robot_description</robot_param> -->
+            <!-- <robot_param_node>robot_state_publisher</robot_param_node> -->
             <parameters>$(find champ_bringup)/config/ros2_control_spot.yaml</parameters>
+            <!-- <controller_manager_name>controller_manager</controller_manager_name> -->
         </plugin>
     </gazebo>
+
 </robot>
+

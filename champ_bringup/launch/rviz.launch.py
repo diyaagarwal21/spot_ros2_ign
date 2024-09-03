@@ -23,7 +23,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    bringup_dir = get_package_share_directory('thorvald_bringup')
+    bringup_dir = get_package_share_directory('champ_bringup')
     rviz_config_file = LaunchConfiguration('rviz_config')
 
     declare_rviz_config_file_cmd = DeclareLaunchArgument(

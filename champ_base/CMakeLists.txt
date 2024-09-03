@@ -20,6 +20,8 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(message_filters REQUIRED)
 find_package(urdf REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+
 
 include_directories(
   include
@@ -43,7 +45,8 @@ set(dependencies
   visualization_msgs
   champ_msgs
   champ
-  urdf)
+  urdf
+  tf2_geometry_msgs)
 
 add_executable(message_relay src/message_relay.cpp)
 ament_target_dependencies(message_relay ${dependencies})

@@ -45,7 +45,24 @@
                             </intrinsics>
                         </lens>
                     </camera>
-                    <plugin filename="mono-camera-system" name="subt::MonoCameraSystem" />
+                    <plugin filename="mono-camera-system" name="subt::MonoCameraSystem" >
+                    <!--added by diya 8/30-->
+                        <camera>
+                            <image_topic>camera/image_raw</image_topic>
+                            <camera_info_topic>camera/camera_info</camera_info_topic>
+                            <frame_name>camera_frame</frame_name>
+                            <update_rate>30.0</update_rate>
+                        </camera>
+                    </plugin>
+
+                    <!-- <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                        <ros>
+                            <namespace>custom_ns</namespace>
+                            <argument>image_raw:=custom</argument>
+                            <argument>camera_info:=custom_info</argument>
+                        </ros>
+                            <hack_baseline>0.07</hack_baseline>
+                    </plugin> -->
                 </sensor>
 
                 <sensor name="${name}_depth" type="depth_camera">
