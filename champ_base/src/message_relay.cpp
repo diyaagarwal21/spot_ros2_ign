@@ -156,6 +156,9 @@ void MessageRelay::jointStatesRawCallback(const champ_msgs::msg::Joints::ConstSh
       point.positions[i] = msg->position[i];
     }
 
+    // Assign the time_from_start value here
+    point.time_from_start = point_time_from_start;
+
     joints_cmd_msg.points.push_back(point);
     joint_commands_publisher_->publish(joints_cmd_msg);
   } else {

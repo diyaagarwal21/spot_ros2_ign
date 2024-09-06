@@ -159,62 +159,123 @@
         <hardware>
             <plugin>ign_ros2_control/IgnitionSystem</plugin> 
         </hardware>
+            <!--Front left joints-->
         <joint name="front_left_hip_x">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+               <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
         <joint name="front_left_hip_y">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
         <joint name="front_left_knee">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
+        <!-- front right joints-->
         <joint name="front_right_hip_x">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
         <joint name="front_right_hip_y">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
         <joint name="front_right_knee">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
+        <!--Rear Left joints-->
         <joint name="rear_left_hip_x">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
         <joint name="rear_left_hip_y">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
         <joint name="rear_left_knee">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
+        <!--Rear Right joints-->
         <joint name="rear_right_hip_x">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
         <joint name="rear_right_hip_y">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+            <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
         <joint name="rear_right_knee">
-            <command_interface name="position"/>
-            <state_interface name="position"/>
+             <command_interface name="position">
+                <param name="min">-${pi}</param>
+                <param name="max">${pi}</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+            <state_interface name="effort" />
         </joint>
     </ros2_control>
 
    <gazebo>
         <plugin name="ign_ros2_control::IgnitionROS2ControlPlugin" filename="ign_ros2_control-system">
-            <!-- <robot_param>robot_description</robot_param> -->
-            <!-- <robot_param_node>robot_state_publisher</robot_param_node> -->
             <parameters>$(find champ_bringup)/config/ros2_control_spot.yaml</parameters>
-            <!-- <controller_manager_name>controller_manager</controller_manager_name> -->
         </plugin>
     </gazebo>
 

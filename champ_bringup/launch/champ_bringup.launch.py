@@ -15,8 +15,10 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
+from launch.actions import RegisterEventHandler
 from launch.actions import IncludeLaunchDescription
 from launch.actions import ExecuteProcess
+from launch.event_handlers import OnProcessExit
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions import Command
@@ -39,7 +41,7 @@ def generate_launch_description():
         'champ_description')
 
     use_simulator = LaunchConfiguration('use_simulator')
-    use_sim_time = LaunchConfiguration('use_sim_time')
+    use_sim_time = LaunchConfiguration('use_sim_time', default=True)
     use_rviz = LaunchConfiguration("use_rviz")
     tf_prefix = LaunchConfiguration('tf_prefix')
     rviz_config = LaunchConfiguration("rviz_config")
@@ -52,7 +54,7 @@ def generate_launch_description():
     declare_use_sim_time = DeclareLaunchArgument(
         'use_sim_time',
         default_value='True',
-        description='whether to use or not sim time.')
+        description='If true, use simulated clock')
     declare_use_rviz = DeclareLaunchArgument(
         'use_rviz',
         default_value='True',
@@ -81,7 +83,8 @@ def generate_launch_description():
         # namespace='',
         arguments=['--ros-args', '--log-level', 'INFO'],
         # prefix=['xterm -e gdb -ex run --args'],
-        parameters=[{"use_sim_time": use_sim_time},
+        parameters=[
+            # {"use_sim_time": use_sim_time},
                     champ_params],
         remappings=[('cmd_vel', 'vox_nav/cmd_vel')]
         )
@@ -93,7 +96,8 @@ def generate_launch_description():
         # name='state_estimation',
         output='screen',
         # namespace='',
-        parameters=[{"use_sim_time": use_sim_time},
+        parameters=[
+            # {"use_sim_time": use_sim_time},
                     champ_params],
         remappings=[('cmd_vel', 'vox_nav/cmd_vel')]
         #prefix=['xterm -e gdb -ex run --args'],
@@ -124,7 +128,8 @@ def generate_launch_description():
         condition=IfCondition(use_simulator),
         arguments=['-name', 'spot',
                    '-topic', '/robot_description', "-z", "0.84"],
-        output='screen')
+        output='screen',
+        parameters=[{"use_sim_time": use_sim_time}])
 
     # Start Ignition Gazebo
     # gazebo_world = os.path.join(get_package_share_directory('champ_gazebo'), 'worlds/', 'ground_plane.sdf')
@@ -177,18 +182,37 @@ def generate_launch_description():
         output='screen'
     )
 
+    # added by diya 9/4
+    bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        output='screen'
+    )
+
     ground_plane_path=os.path.join(get_package_share_directory('champ_gazebo'), 'worlds', 'ground_plane.sdf')
     marsyard_path=os.path.join(get_package_share_directory('champ_gazebo'), 'worlds', 'marsyard2020.sdf')
-    moon_path=os.path.join(get_package_share_directory('champ_gazebo'), 'worlds', 'moon.world')
 
     return LaunchDescription([
+        bridge,
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 [os.path.join(get_package_share_directory('ros_ign_gazebo'),
                               'launch', 'ign_gazebo.launch.py')]),
             launch_arguments=[('gz_args', [' -r -v 4 ', ground_plane_path])]),
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=declare_spawn_entity_to_gazebo_node,
+                on_exit=[load_joint_state_controller],
+            )
+        ),
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=load_joint_state_controller,
+                on_exit=[load_joint_trajectory_controller],
+            )
+        ),
         declare_use_simulator,
-        declare_use_sim_time,
         declare_use_rviz,
         declare_tf_prefix,
         declare_rviz_config,
@@ -200,9 +224,9 @@ def generate_launch_description():
         declare_rviz_launch_include,
         declare_spawn_entity_to_gazebo_node,
         declare_localization_params,
-        base_to_footprint_ekf,
         footprint_to_odom_ekf,
-        #controller_manager
-        load_joint_state_controller,
-        load_joint_trajectory_controller
+        base_to_footprint_ekf,
+        # load_joint_state_controller,
+        # load_joint_trajectory_controller,
+        declare_use_sim_time     
     ])
