@@ -161,39 +161,5 @@
                 <mechanicalReduction>1</mechanicalReduction>
             </actuator>
         </transmission>
-
-        <ros2_control name="GazeboSystem" type="system">
-            <hardware>
-                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-            </hardware>
-            <joint name="${leg_name}_hip_x">
-                <command_interface name="position">
-                    <param name="min">-${pi}</param>
-                    <param name="max">${pi}</param>
-                </command_interface>
-                <state_interface name="position" />
-                <state_interface name="velocity" />
-                <state_interface name="effort" />
-            </joint>
-            <joint name="${leg_name}_hip_y">
-                <command_interface name="position">
-                    <param name="min">-${pi}</param>
-                    <param name="max">${pi}</param>
-                </command_interface>
-                <state_interface name="position" />
-                <state_interface name="velocity" />
-                <state_interface name="effort" />
-            </joint>
-            <joint name="${leg_name}_knee">
-                <command_interface name="position">
-                    <param name="min">-${pi}</param>
-                    <param name="max">${pi}</param>
-                </command_interface>
-                <state_interface name="position" />
-                <state_interface name="velocity" />
-                <state_interface name="effort" />
-            </joint>
-        </ros2_control>
-
     </xacro:macro>
 </robot>

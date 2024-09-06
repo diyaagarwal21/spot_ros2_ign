@@ -14,6 +14,9 @@
       nominal_height: 0.2
     loop_rate: 1000.0
     use_sim_time: true
+    #added by diya 9/4
+    # odom_frame: odom
+    # base_link_frame: base_link
     base: base_link
     # LINKS for SPOT
     left_front_links: ["front_left_hip", "front_left_upper_leg", "front_left_lower_leg", "front_left_ee"]
