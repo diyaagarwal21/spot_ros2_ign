@@ -66,7 +66,8 @@ For different environments, see last section.
 To see the topics to configure the controllers, run the following commands:
 
 This shows the links/joints of the robot.
-`
+
+```
 ros2 run tf2_tools view_frames
 ```
 
