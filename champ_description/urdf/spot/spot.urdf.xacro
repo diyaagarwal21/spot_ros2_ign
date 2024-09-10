@@ -9,7 +9,7 @@
     </xacro:unless>
 
     <!-- Pass either "urdf" or "ign" to tell the parser what is the desired target format. -->
-    <xacro:arg name="rendering_target" default="urdf" />
+    <xacro:arg name="rendering_target" default="ign" />
     <xacro:arg name="simulate_cameras" default="False" />
     <xacro:arg name="simulate_imu" default="False" />
 
@@ -25,12 +25,12 @@
     <link name="$(arg prefix)base_link">
         <visual>
             <geometry>
-                <mesh filename="$(find champ_description)/meshes/spot/body.dae" />
+                <mesh filename="file://$(find champ_description)/meshes/spot/body.dae" />
             </geometry>
         </visual>
         <collision>
             <geometry>
-                <mesh filename="$(find champ_description)/meshes/spot/body_collision.stl" />
+                <mesh filename="file://$(find champ_description)/meshes/spot/body_collision.stl" />
             </geometry>
         </collision>
         <inertial>

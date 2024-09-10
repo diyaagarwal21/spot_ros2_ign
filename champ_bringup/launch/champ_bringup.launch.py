@@ -190,6 +190,15 @@ def generate_launch_description():
         output='screen'
     )
 
+    joint_state_publisher_gui = Node(
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
+        name='joint_state_publisher_gui',
+        output='screen',
+        parameters=[{'use_sim_time': True}]
+    )
+
+
     ground_plane_path=os.path.join(get_package_share_directory('champ_gazebo'), 'worlds', 'ground_plane.sdf')
     marsyard_path=os.path.join(get_package_share_directory('champ_gazebo'), 'worlds', 'marsyard2020.sdf')
 
@@ -217,7 +226,6 @@ def generate_launch_description():
         declare_tf_prefix,
         declare_rviz_config,
         declare_champ_params,
-        #declare_start_gazebo_cmd,
         declare_quadruped_controller_node,
         declare_state_estimation_node,
         declare_robot_state_publisher_node,
@@ -226,7 +234,6 @@ def generate_launch_description():
         declare_localization_params,
         footprint_to_odom_ekf,
         base_to_footprint_ekf,
-        # load_joint_state_controller,
-        # load_joint_trajectory_controller,
-        declare_use_sim_time     
+        declare_use_sim_time,
+        joint_state_publisher_gui  # added by diya 9/6
     ])

@@ -42,17 +42,17 @@ joint_trajectory_controller:
     constraints:
       stopped_velocity_tolerance: 0.1 # Defaults to 0.01
       goal_time: 0.1 # Defaults to 0.0 (start immediately)   
-    gains:
-      front_left_hip_x  : {p: 50.0, i: 0.05, d: 1.0}
-      front_left_hip_y  : {p: 50.0, i: 0.05, d: 1.0}
-      front_left_knee   : {p: 50.0, i: 0.05, d: 1.0}
-      front_right_hip_x : {p: 50.0, i: 0.05, d: 1.0}
-      front_right_hip_y : {p: 50.0, i: 0.05, d: 1.0}
-      front_right_knee  : {p: 50.0, i: 0.05, d: 1.0}
-      rear_left_hip_x   : {p: 50.0, i: 0.05, d: 1.0}
-      rear_left_hip_y   : {p: 50.0, i: 0.05, d: 1.0}
-      rear_left_knee    : {p: 50.0, i: 0.05, d: 1.0}
-      rear_right_hip_x  : {p: 50.0, i: 0.05, d: 1.0}
-      rear_right_hip_y  : {p: 50.0, i: 0.05, d: 1.0}
-      rear_right_knee   : {p: 50.0, i: 0.05, d: 1.0}
+    gains:  
+        front_left_hip_x  : {p: 250.0, i: 0.2, d: 5.0}
+        front_left_hip_y  : {p: 250.0, i: 0.2, d: 5.0}
+        front_left_knee   : {p: 250.0, i: 0.2, d: 5.0}
+        front_right_hip_x : {p: 250.0, i: 0.2, d: 5.0}
+        front_right_hip_y : {p: 250.0, i: 0.2, d: 5.0}
+        front_right_knee  : {p: 250.0, i: 0.2, d: 5.0}
+        rear_left_hip_x   : {p: 250.0, i: 0.2, d: 5.0}
+        rear_left_hip_y   : {p: 250.0, i: 0.2, d: 5.0}
+        rear_left_knee    : {p: 250.0, i: 0.2, d: 5.0}
+        rear_right_hip_x  : {p: 250.0, i: 0.2, d: 5.0}
+        rear_right_hip_y  : {p: 250.0, i: 0.2, d: 5.0}
+        rear_right_knee   : {p: 250.0, i: 0.2, d: 5.0}
    #   {p: 250.0, i: 0.2, d: 5.0} --> previously
